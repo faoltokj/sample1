@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebBankApplication.Models
+namespace WebBankApplication.BankApplication
 {
     public partial class User
     {

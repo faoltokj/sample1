@@ -1,0 +1,33 @@
+﻿
+@page
+@model WebBankApplication.Pages.Top20AccountsModel
+@{
+    ViewData["Title"] = "Top 20 Accounts";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Account ID</th>
+            <th>Frequency</th>
+            <th>Created</th>
+            <th>Balance</th>
+
+            <!-- Add more columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model.Top20Accounts)
+        {
+            <tr>
+                <td>@account.AccountId</td>
+                <td>@account.Frequency</td>
+                <td>@account.Created</td>
+                <td>@account.Balance</td>
+                <!-- Add more cells as needed -->
+            </tr>
+        }
+    </tbody>
+</table>

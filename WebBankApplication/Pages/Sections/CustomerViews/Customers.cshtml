@@ -1,0 +1,57 @@
+﻿@page
+@model WebBankApplication.Pages.CustomersModel
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="text-center">
+    <!-- Add this inside your text-center div -->
+    <div class="search-container">
+        <form asp-page="~/Sections/CustomerViews/Customers" method="get">
+            <input type="text" placeholder="Search by name or city" name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+
+    <h1 class="display-4">Customer Information</h1>
+
+    <table class="table">
+        <thead class="header-table">
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Birthday</th>
+                <!-- Add other customer properties as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.Givenname @customer.Surname</td>
+                    <td>@customer.Country</td>
+                    <td>@customer.City</td>
+                    <td>@customer.Birthday</td>
+                    <!-- Add other customer properties as needed -->
+                    <td><a asp-page="/Sections/CustomerViews/CustomerDetails" asp-route-customerId="@customer.CustomerId">View Details</a></td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination links -->
+   
+    <div class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <a asp-page="/Sections/CustomerViews/Customers" asp-route-page="@i">@i</a>
+        }
+    </div>
+
+</div>

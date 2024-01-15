@@ -1,0 +1,48 @@
+﻿@page
+@model WebBankApplication.Pages.BankApplicationModel
+@{
+    ViewData["Title"] = "Bank Application Page";
+}
+
+<style>
+    .view-top-20-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #000;
+        color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+    }
+
+        .view-top-20-link:hover {
+            background-color: #0056b3;
+            color: #fff;
+            transform: scale(1.1);
+        }
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Bank Application Information</h1>
+
+    <table class="table">
+        <thead class="header-table">
+            <tr>
+                <th>Total Customers</th>
+                <th>Total Accounts</th>
+                <th>Total Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="color: black;">
+                <td>@Model.ViewModel.TotalCustomers</td>
+                <td>@Model.ViewModel.TotalAccounts</td>
+                <td>@Model.ViewModel.TotalBalance</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Add a link to the Top 20 Accounts page within the BankApplication page -->
+    <p><a asp-area="" asp-page="/Top20Accounts">View Top 20 Accounts</a></p>
+</div>
