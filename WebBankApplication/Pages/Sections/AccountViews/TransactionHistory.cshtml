@@ -1,0 +1,66 @@
+﻿@page
+@model WebBankApplication.Pages.Sections.AccountViews.TransactionHistoryModel
+@{
+    ViewData["Title"] = "Transaction History";
+}
+
+<div class="container mt-5">
+    <h1 class="display-4">Transaction History of @Model.Customer.Givenname @Model.Customer.Surname (ID: @Model.CustomerId)</h1>
+
+    <table class="table" id="transactionTable">
+        <thead class="header-table">
+            <tr>
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Operation</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.Date</td>
+                    <td>@transaction.Operation</td>
+                    <td>@transaction.Amount</td>
+                    <td>@transaction.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <button class="btn btn-secondary" id="loadMoreBtn">Load More</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        var skip = @Model.Transactions.Count; // Use the correct property name
+        var take = @Model.TransactionsPerPage;
+
+        $(document).ready(function () {
+            $('#loadMoreBtn').on('click', function () {
+                loadMore();
+            });
+        });
+
+        function loadMore() {
+            $.ajax({
+                url: '/Sections/CustomerViews/TransactionHistory?handler=More&skip=' + skip + '&take=' + take + '&customerId=@Model.CustomerId',
+                type: 'GET',
+                success: function (result) {
+                    $('#transactionTable tbody').append(result);
+                    skip += take;
+                },
+                error: function () {
+                    alert('Error loading more transactions.');
+                }
+            });
+        }
+    </script>
+}

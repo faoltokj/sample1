@@ -1,0 +1,43 @@
+﻿@page
+@model WebBankApplication.Pages.Sections.AccountViews.AccountManagementModel
+@{
+    ViewData["Title"] = "Account Management";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">Account Details</h1>
+            @if (Model.Account != null)
+            {
+                <table class="table">
+                    <tr>
+                        <td><strong>Account ID:</strong></td>
+                        <td>@Model.Account.AccountId</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Balance:</strong></td>
+                        <td>@Model.Account.Balance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Created:</strong></td>
+                        <td>@Model.Account.Created</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Name:</strong></td>
+                        <td>@Model.CustomerName</td>
+                    </tr>
+                </table>
+
+                <a asp-page="/Sections/AccountViews/Withdraw" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Withdraw</a>
+
+                <!-- Withdraw form goes here -->
+                
+            }
+            else
+            {
+                <p>No account details available.</p>
+            }
+        </div>
+    </div>
+</div>

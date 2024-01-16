@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebBankApplication.Data;
 using WebBankApplication.BankApplication;
 using WebBankApplication.Services;
+using WebBankApplication.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<ITransactionService, TransactionService>();
+
 
 var app = builder.Build();
 

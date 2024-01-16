@@ -1,4 +1,5 @@
 ﻿using WebBankApplication.BankApplication;
+using WebBankApplication.ViewModels;
 
 namespace WebBankApplication.Services
 {
@@ -10,6 +11,8 @@ namespace WebBankApplication.Services
 
         public IEnumerable<Customer> SearchCustomers(string searchTerm);
         public int SearchTotalCustomers(string searchTerm);
+
+        CustomerViewModel GetCustomerDetails(int customerId);
 
     }
 }

@@ -1,0 +1,67 @@
+﻿@page
+@model WebBankApplication.Pages.Sections.CustomerViews.CustomerDetailsModel
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/path-to-default-profile-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4">Customer Profile</h1>
+            <table class="table">
+                <tr>
+                    <td><strong>Customer ID:</strong></td>
+                    <td>@Model.Customer.CustomerId</td>
+                </tr>
+                <tr>
+                    <td><strong>Name:</strong></td>
+                    <td>@Model.Customer.GivenName @Model.Customer.Surname</td>
+                </tr>
+                <tr>
+                    <td><strong>Gender:</strong></td>
+                    <td>@Model.Customer.Gender</td>
+                </tr>
+                <tr>
+                    <td><strong>Street Address:</strong></td>
+                    <td>@Model.Customer.StreetAddress</td>
+                </tr>
+                <tr>
+                    <td><strong>City:</strong></td>
+                    <td>@Model.Customer.City</td>
+                </tr>
+                <tr>
+                    <td><strong>Country:</strong></td>
+                    <td>@Model.Customer.Country</td>
+                </tr>
+                <tr>
+                    <td><strong>Telephone Number:</strong></td>
+                    <td>@Model.Customer.TelephoneNumber</td>
+                </tr>
+                <tr>
+                    <td><strong>Email Address:</strong></td>
+                    <td>@Model.Customer.EmailAddress</td>
+                </tr>
+                <tr>
+                    <td><strong>Balance:</strong></td>
+                    <td>@Model.Customer.Balance</td>
+                </tr>
+            </table>
+
+            <a asp-page="/Sections/CustomerViews/Customers" class="btn btn-secondary">Back</a>
+
+            <a asp-page="/Sections/AccountViews/TransactionHistory" asp-route-customerId="@Model.Customer.CustomerId" class="btn btn-primary">Transaction History</a>
+            <a asp-page="/Sections/AccountViews/AccountManagement" asp-route-customerId="@Model.Customer.CustomerId" class="btn btn-success">Account Management</a>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // Placeholder for the profile picture
+        document.getElementById("profile-picture").src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100%' height='100%' fill='%23ccc'/%3E%3Ctext x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%23fff'%3EPlaceholder%3C/text%3E%3C/svg%3E";
+    </script>
+}

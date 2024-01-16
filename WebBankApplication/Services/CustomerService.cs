@@ -1,4 +1,5 @@
 ﻿using WebBankApplication.BankApplication;
+using WebBankApplication.ViewModels;
 
 namespace WebBankApplication.Services
 {
@@ -40,6 +41,32 @@ namespace WebBankApplication.Services
         {
             return _dbContext.Customers
                 .Count(c => c.Givenname.Contains(searchTerm) || c.Surname.Contains(searchTerm) || c.City.Contains(searchTerm));
+        }
+
+        public CustomerViewModel GetCustomerDetails(int customerId)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId);
+
+            if (customer == null)
+            {
+                return null;
+            }
+
+            var account = _dbContext.Accounts.FirstOrDefault(a => a.AccountId == customerId);
+
+            return new CustomerViewModel
+            {
+                CustomerId = customer.CustomerId,
+                Gender = customer.Gender,
+                GivenName = customer.Givenname,
+                Surname = customer.Surname,
+                StreetAddress = customer.Streetaddress,
+                City = customer.City,
+                Country = customer.Country,
+                TelephoneNumber = customer.Telephonenumber,
+                EmailAddress = customer.Emailaddress,
+                Balance = account?.Balance ?? 0 // Get the balance if the account exists, otherwise default to 0
+            };
         }
 
 
