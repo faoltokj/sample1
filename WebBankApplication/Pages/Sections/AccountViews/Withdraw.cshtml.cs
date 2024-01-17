@@ -35,6 +35,8 @@ namespace WebBankApplication.Pages.Sections.AccountViews
 
         public IActionResult OnPost()
         {
+           
+
             var accountDb = _accountService.GetAccount(AccountId); // Use AccountId here
             if (accountDb.Balance < Amount)
             {
@@ -45,9 +47,11 @@ namespace WebBankApplication.Pages.Sections.AccountViews
             {
                 accountDb.Balance -= Amount;
                 _accountService.Update(accountDb);
+                Balance = accountDb.Balance;  // Update the Balance property
             }
             return Page();
 
+        
 
         }
 

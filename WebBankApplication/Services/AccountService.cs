@@ -66,8 +66,14 @@ namespace WebBankApplication.Services
 
         public void Update(Account account)
         {
+            // Log the current state before the update
+            Console.WriteLine($"Current Balance (before update): {account.Balance}");
+
             _dbContext.Accounts.Update(account);
             _dbContext.SaveChanges();
+
+            // Log the updated state after the update
+            Console.WriteLine($"Updated Balance (after update): {account.Balance}");
         }
 
 
