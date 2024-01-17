@@ -61,11 +61,12 @@ namespace WebBankApplication.Services
 
         public Account GetAccount(int accountId)
         {
-            return _dbContext.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+            return _dbContext.Accounts.First(a => a.AccountId == accountId);
         }
 
         public void Update(Account account)
         {
+            _dbContext.Accounts.Update(account);
             _dbContext.SaveChanges();
         }
 
