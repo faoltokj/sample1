@@ -1,10 +1,9 @@
 ﻿@page
-@model WebBankApplication.Pages.Sections.AccountViews.WithdrawModel
+@model WebBankApplication.Pages.Sections.AccountViews.DepositModel
 @{
-   
 }
 
-<h1>Withdraw</h1>
+<h1>Deposit</h1>
 <h3>Balance: @Model.Balance kr</h3>
 <form method="post">
     <div class="form-group">
@@ -12,5 +11,5 @@
         <input class="form-control" asp-for="Amount" />
         <span class="field-validation-error" asp-validation-for="Amount"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Withdraw</button>
+    <button type="submit" class="btn btn-primary">Deposit</button>
 </form>

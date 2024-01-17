@@ -1,20 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using WebBankApplication.Interfaces;
 using WebBankApplication.Services;
-using WebBankApplication.BankApplication;
-using WebBankApplication.ViewModels;
-using Microsoft.AspNetCore.Routing;
-
 
 namespace WebBankApplication.Pages.Sections.AccountViews
 {
-    public class WithdrawModel : PageModel
+    public class TransferModel : PageModel
     {
+
         private readonly IAccountService _accountService;
 
-        public WithdrawModel(IAccountService accountService)
+        public TransferModel(IAccountService accountService)
         {
             _accountService = accountService;
         }
@@ -23,10 +19,14 @@ namespace WebBankApplication.Pages.Sections.AccountViews
         [Range(100, 10000)]
         public decimal Amount { get; set; }
 
+        [BindProperty]
+        public int TargetAccountId { get; set; }
+
         public decimal Balance { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int AccountId { get; set; }
+
         public void OnGet(int accountId)
         {
             Console.WriteLine($"OnGet method called. AccountId: {accountId}");
@@ -49,22 +49,37 @@ namespace WebBankApplication.Pages.Sections.AccountViews
                 Console.WriteLine("Can't find account");
             }
 
+            // Check if there is enough balance for the transfer
             if (accountDb.Balance < Amount)
             {
-                ModelState.AddModelError("Amount", "You don't have that much money!");
+                ModelState.AddModelError("Amount", "Not enough money for the transfer!");
+                return Page();
             }
 
-            if (ModelState.IsValid)
+            // Perform transfer logic
+            accountDb.Balance -= Amount;
+            _accountService.Update(accountDb);
+
+            // You need to implement logic to find and update the target account
+            // For simplicity, I assume there is a similar Update method in IAccountService
+            var targetAccountDb = _accountService.GetAccount(TargetAccountId);
+
+            if (targetAccountDb != null)
             {
-                accountDb.Balance -= Amount;
-                _accountService.Update(accountDb);
-                Balance = accountDb.Balance;
+                targetAccountDb.Balance += Amount;
+                _accountService.Update(targetAccountDb);
             }
+            else
+            {
+                // Handle the case where the target account is not found
+                // You can return an error message or perform other actions.
+                Console.WriteLine("Can't find target account");
+            }
+
+            Balance = accountDb.Balance;
+
             return Page();
         }
-
-
     }
-
 
 }

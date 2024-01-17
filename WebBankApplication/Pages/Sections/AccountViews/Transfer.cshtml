@@ -1,0 +1,21 @@
+﻿@page
+@model WebBankApplication.Pages.Sections.AccountViews.TransferModel
+@{
+}
+
+
+h1>Transfer</h1>
+<h3>Balance: @Model.Balance kr</h3>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Amount">Amount</label>
+        <input class="form-control" asp-for="Amount" />
+        <span class="field-validation-error" asp-validation-for="Amount"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TargetAccountId">Target Account ID</label>
+        <input class="form-control" asp-for="TargetAccountId" />
+        <span class="field-validation-error" asp-validation-for="TargetAccountId"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Transfer</button>
+</form>

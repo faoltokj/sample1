@@ -1,20 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using WebBankApplication.Interfaces;
 using WebBankApplication.Services;
-using WebBankApplication.BankApplication;
-using WebBankApplication.ViewModels;
-using Microsoft.AspNetCore.Routing;
-
 
 namespace WebBankApplication.Pages.Sections.AccountViews
 {
-    public class WithdrawModel : PageModel
+    public class DepositModel : PageModel
     {
         private readonly IAccountService _accountService;
 
-        public WithdrawModel(IAccountService accountService)
+        public DepositModel(IAccountService accountService)
         {
             _accountService = accountService;
         }
@@ -27,6 +22,7 @@ namespace WebBankApplication.Pages.Sections.AccountViews
 
         [BindProperty(SupportsGet = true)]
         public int AccountId { get; set; }
+
         public void OnGet(int accountId)
         {
             Console.WriteLine($"OnGet method called. AccountId: {accountId}");
@@ -49,22 +45,13 @@ namespace WebBankApplication.Pages.Sections.AccountViews
                 Console.WriteLine("Can't find account");
             }
 
-            if (accountDb.Balance < Amount)
-            {
-                ModelState.AddModelError("Amount", "You don't have that much money!");
-            }
+            // Perform deposit logic
+            accountDb.Balance += Amount;
+            _accountService.Update(accountDb);
+            Balance = accountDb.Balance;
 
-            if (ModelState.IsValid)
-            {
-                accountDb.Balance -= Amount;
-                _accountService.Update(accountDb);
-                Balance = accountDb.Balance;
-            }
             return Page();
         }
-
-
     }
-
-
 }
+
