@@ -13,10 +13,12 @@ namespace WebBankApplication.Pages.Sections.AccountViews
     public class WithdrawModel : PageModel
     {
         private readonly IAccountService _accountService;
+        private readonly ICustomerService _customerService;
 
-        public WithdrawModel(IAccountService accountService)
+        public WithdrawModel(IAccountService accountService, ICustomerService customerService)
         {
             _accountService = accountService;
+            _customerService = customerService;
         }
 
         [BindProperty]
@@ -27,13 +29,19 @@ namespace WebBankApplication.Pages.Sections.AccountViews
 
         [BindProperty(SupportsGet = true)]
         public int AccountId { get; set; }
+        public int CustomerId { get; set; }
+
         public void OnGet(int accountId)
         {
             Console.WriteLine($"OnGet method called. AccountId: {accountId}");
             AccountId = accountId;
             var accountDb = _accountService.GetAccount(accountId);
             Balance = accountDb.Balance;
+
+         
+
         }
+
 
         public IActionResult OnPost()
         {
@@ -59,6 +67,7 @@ namespace WebBankApplication.Pages.Sections.AccountViews
                 accountDb.Balance -= Amount;
                 _accountService.Update(accountDb);
                 Balance = accountDb.Balance;
+
             }
             return Page();
         }

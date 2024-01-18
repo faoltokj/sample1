@@ -43,12 +43,12 @@ namespace WebBankApplication.Pages.Sections.AccountViews
                 return NotFound();
             }
 
-            //// Fetch customer details to get the name
-            //var customer = _customerService.GetCustomerDetails(customerId);
-            //if (customer != null)
-            //{
-            //    CustomerName = $"{customer.GivenName} {customer.Surname}";
-            //}
+            // Fetch customer details to get the name
+            var customer = _customerService.GetCustomerDetails(customerId);
+            if (customer != null)
+            {
+                CustomerName = $"{customer.GivenName} {customer.Surname}";
+            }
 
             return Page();
 

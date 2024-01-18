@@ -25,6 +25,7 @@ namespace WebBankApplication.Data
         {
             AddUserIfNotExists("richard.chalk@systementor.se", "Hejsan123#", new string[] { "Admin" });
             AddUserIfNotExists("richard.chalk@customer.systementor.se", "Hejsan123#", new string[] { "Cashier" });
+            AddUserIfNotExists("richard.chalk@gmail.se", "Hejsan123#", new string[] { "Cashier" });
         }
 
         // Här finns möjlighet att uppdatera dina användares roller
