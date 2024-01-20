@@ -24,7 +24,7 @@ namespace WebBankApplication.Data
         private void SeedUsers()
         {
             AddUserIfNotExists("richard.chalk@systementor.se", "Hejsan123#", new string[] { "Admin" });
-            AddUserIfNotExists("richard.chalk@customer.systementor.se", "Hejsan123#", new string[] { "Cashier" });
+            AddUserIfNotExists("richard.chalk@customer.systementor.se", "Hejsan123#", new string[] { "Customer" });
             AddUserIfNotExists("richard.chalk@gmail.se", "Hejsan123#", new string[] { "Cashier" });
         }
 
@@ -33,6 +33,7 @@ namespace WebBankApplication.Data
         {
             AddRoleIfNotExisting("Admin");
             AddRoleIfNotExisting("Cashier");
+            AddRoleIfNotExisting("Customer");
         }
 
         private void AddRoleIfNotExisting(string roleName)
@@ -58,6 +59,8 @@ namespace WebBankApplication.Data
             _userManager.CreateAsync(user, password).Wait();
             _userManager.AddToRolesAsync(user, roles).Wait();
         }
+
+       
 
     }
 }

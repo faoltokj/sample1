@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebBankApplication.BankApplication;
 using WebBankApplication.Services;
 
 namespace WebBankApplication.Pages
 {
+    [Authorize(Roles = "Customer")]
     public class CustomersModel : PageModel
     {
         private readonly ICustomerService _customerService;

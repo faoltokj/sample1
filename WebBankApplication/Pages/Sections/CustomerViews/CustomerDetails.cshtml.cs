@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebBankApplication.Services;
@@ -5,6 +6,7 @@ using WebBankApplication.ViewModels;
 
 namespace WebBankApplication.Pages.Sections.CustomerViews
 {
+   
     public class CustomerDetailsModel : PageModel
     {
 
