@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Transaction History";
 }
-
 <div class="container mt-5">
     <h1 class="display-4">Transaction History of @Model.Customer.Givenname @Model.Customer.Surname (ID: @Model.CustomerId)</h1>
 
@@ -40,8 +39,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
-        var skip = @Model.Transactions.Count; // Use the correct property name
+        var skip = @Model.Transactions.Count;
         var take = @Model.TransactionsPerPage;
+        var customerId = @Model.CustomerId;
 
         $(document).ready(function () {
             $('#loadMoreBtn').on('click', function () {
@@ -51,13 +51,34 @@
 
         function loadMore() {
             $.ajax({
-                url: '/Sections/CustomerViews/TransactionHistory?handler=More&skip=' + skip + '&take=' + take + '&customerId=@Model.CustomerId',
+                url: '@Url.Page("TransactionHistory", new { handler = "More" })',
                 type: 'GET',
-                success: function (result) {
-                    $('#transactionTable tbody').append(result);
-                    skip += take;
+                data: {
+                    skip: skip,
+                    take: take,
+                    customerId: customerId
                 },
-                error: function () {
+                success: function (result) {
+                    console.log(result)
+                    if (result && result.length > 0) {
+                        var html = '';
+                        result.forEach(function (transaction) {
+                            html += '<tr>';
+                            html += '<td>' + transaction.transactionId + '</td>';
+                            html += '<td>' + transaction.date + '</td>';
+                            html += '<td>' + transaction.operation + '</td>';
+                            html += '<td>' + transaction.amount + '</td>';
+                            html += '<td>' + transaction.balance + '</td>';
+                            html += '</tr>';
+                        });
+                        $('#transactionTable tbody').append(html);
+                        skip += take;
+                    } else {
+                        alert('No more transactions to load.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error loading more transactions:', xhr, status, error);
                     alert('Error loading more transactions.');
                 }
             });

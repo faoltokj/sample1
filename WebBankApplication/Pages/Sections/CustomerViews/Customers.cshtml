@@ -28,29 +28,46 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model.Customers)
+            @if (Model.PageListView.Customer.Any())
+            {
+                @foreach (var customer in Model.PageListView.Customer)
+                {
+                    <tr>
+                        <td>@customer.CustomerId</td>
+                        <td>@customer.Givenname @customer.Surname</td>
+                        <td>@customer.Country</td>
+                        <td>@customer.City</td>
+                        <td>@customer.Birthday</td>
+                        <!-- Add other customer properties as needed -->
+                        <td><a asp-page="/Sections/CustomerViews/CustomerDetails" asp-route-customerId="@customer.CustomerId">View Details</a></td>
+
+                    </tr>
+
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@customer.CustomerId</td>
-                    <td>@customer.Givenname @customer.Surname</td>
-                    <td>@customer.Country</td>
-                    <td>@customer.City</td>
-                    <td>@customer.Birthday</td>
-                    <!-- Add other customer properties as needed -->
-                    <td><a asp-page="/Sections/CustomerViews/CustomerDetails" asp-route-customerId="@customer.CustomerId">View Details</a></td>
-
+                    <td colspan="6"><h6 class="mt-5 text-center">Record not Found</h6></td>
                 </tr>
-
             }
+
         </tbody>
     </table>
 
     <!-- Pagination links -->
-   
-    <div class="pagination">
-        @for (var i = 1; i <= Model.TotalPages; i++)
+
+    <div class="container">
+        @for (int i = 1; i <= Model.PageListView.Customer.PageCount; i++)
         {
-            <a asp-page="/Sections/CustomerViews/Customers" asp-route-page="@i">@i</a>
+            if (i == Model.PageListView.Customer.PageNumber)
+            {
+                <span class="btn btn-primary">@i</span>
+            }
+            else
+            {
+                <a href="?page=@i" class="btn btn-outline-primary">@i</a>
+            }
         }
     </div>
 

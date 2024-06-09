@@ -40,11 +40,13 @@ namespace WebBankApplication.Pages.Sections.AccountViews
             return Page();
         }
 
-        public IActionResult OnGetMore(int skip, int take)
+        public IActionResult OnGetMore(int skip, int take, int customerId)
         {
-            LoadTransactions(skip, take);
-            return Partial("_TransactionListPartial", this);
+            take += skip;
+            var moreTransactions = _transactionService.GetTransactionHistory(customerId, skip, take);
+            return new JsonResult(moreTransactions);
         }
+
 
         private void LoadTransactions(int skip, int take)
         {
