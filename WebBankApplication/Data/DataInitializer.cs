@@ -24,7 +24,7 @@ namespace WebBankApplication.Data
         private void SeedUsers()
         {
             AddUserIfNotExists("richard.chalk@systementor.se", "Hejsan123#", new string[] { "Admin" });
-            AddUserIfNotExists("richard.chalk@customer.systementor.se", "Hejsan123#", new string[] { "Customer" });
+            //AddUserIfNotExists("richard.chalk@customer.systementor.se", "Hejsan123#", new string[] { "Customer" });
             AddUserIfNotExists("richard.chalk@gmail.se", "Hejsan123#", new string[] { "Cashier" });
         }
 

@@ -8,7 +8,7 @@ using X.PagedList;
 
 namespace WebBankApplication.Pages
 {
-    [Authorize(Roles = "Customer")]
+    [Authorize(Roles = "Cashier")]
     public class CustomersModel : PageModel
     {
         private readonly ICustomerService _customerService;
