@@ -16,6 +16,6 @@ Email: richard.chalk@systementor.se
 Password: Hejsan123#
 Role: Handles Users (CRUD)
 
-Email: richard.chalk@customer.systementor.se
+Email: richard.chalk@gmail.se
 Password: Hejsan123#
 Role: Handles Customers (Transaction, Transaction history, Customer information)
