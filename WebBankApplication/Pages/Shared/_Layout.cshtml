@@ -1,36 +1,59 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebBankApplication</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebBankApplication.styles.css" asp-append-version="true" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <title>Web Bank Application</title>
+    <link href="~/customerSide/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/customerSide/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="~/customerSide/assets/css/templatemo-finance-business.css">
+    <link rel="stylesheet" href="~/customerSide/assets/css/owl.css">
+    <style>
+        .btn-link {
+            color: white !important;
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">WebBankApplication</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand"><h2>KYH Bank</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-page="/Index">
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/BankApplication">Bank Application</a>
+                            <a class="nav-link" asp-page="/BankApplication">Bank Application</a>
                         </li>
-
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="crudMenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="crudMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Crud Menu
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="crudMenu">
@@ -39,41 +62,80 @@
                                     <a class="dropdown-item" asp-page="/Sections/CrudMenu/DeleteUser">Delete User</a>
                                 </div>
                             </li>
-                           
                         }
+
                         @if (User.IsInRole("Cashier"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="Sections/CustomerViews/Customers">Customers</a>
+                                <a class="nav-link" asp-page="/Sections/CustomerViews/Customers">Customer</a>
                             </li>
                         }
-                       
-                      
-                        
+                        @if (User.IsInRole("Admin") || User.IsInRole("Cashier"))
+                        {
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                    <button type="submit" class="nav-link btn btn-link">Log out</button>
+                                </form>
+                            </li>
+
+
+                        }
+                        else
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Identity/Account/Login">Login</a>
+                            </li>
+                        }
+
+
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
 
-           
-        </main>
+
+    @RenderBody()
+
+    <div class="sub-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        &copy; 2024 - WebBankApplication - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WebBankApplication - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/customerSide/vendor/jquery/jquery.min.js"></script>
+    <script src="~/customerSide/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <!-- Additional Scripts -->
+    <script src="~/customerSide/assets/js/custom.js"></script>
+    <script src="~/customerSide/assets/js/owl.js"></script>
+    <script src="~/customerSide/assets/js/slick.js"></script>
+    <script src="~/customerSide/assets/js/accordions.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0;
+        function clearField(t) {
+            if (!cleared[t.id]) {
+                cleared[t.id] = 1;
+                t.value = '';
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+
 </body>
 </html>

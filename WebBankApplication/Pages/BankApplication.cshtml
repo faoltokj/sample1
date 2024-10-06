@@ -4,45 +4,48 @@
     ViewData["Title"] = "Bank Application Page";
 }
 
-<style>
-    .view-top-20-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #000;
-        color: #007bff;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 20px;
-        transition: all 0.3s ease;
-    }
 
-        .view-top-20-link:hover {
-            background-color: #0056b3;
-            color: #fff;
-            transform: scale(1.1);
-        }
-</style>
-
-<div class="text-center">
-    <h1 class="display-4">Bank Application Information</h1>
-
-    <table class="table">
-        <thead class="header-table">
-            <tr>
-                <th>Total Customers</th>
-                <th>Total Accounts</th>
-                <th>Total Balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="color: black;">
-                <td>@Model.ViewModel.TotalCustomers</td>
-                <td>@Model.ViewModel.TotalAccounts</td>
-                <td>@Model.ViewModel.TotalBalance</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Add a link to the Top 20 Accounts page within the BankApplication page -->
-    <p><a asp-area="" asp-page="/Top20Accounts">View Top 20 Accounts</a></p>
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bank Application Page</h1>
+                <span>KYH Bank System</span>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="container" style="margin-top:100px">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Bank Application Information</h4>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-hover table-bordered">
+                <tr class="thead-dark">
+                    <th>Total Customers</th>
+                    <th>Total Accounts</th>
+                    <th>Total Balance</th>
+                </tr>
+                <tr>
+                    <td>@Model.ViewModel.TotalCustomers</td>
+                    <td>@Model.ViewModel.TotalAccounts</td>
+                    <td>@Model.ViewModel.TotalBalance</td>
+                </tr>
+            </table>
+            <p><a asp-area="" asp-page="/Top20Accounts" style="display:flex; justify-content:center">View Top 20 Accounts</a></p>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

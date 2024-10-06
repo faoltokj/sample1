@@ -4,42 +4,64 @@
     ViewData["Title"] = "Account Management";
 }
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="display-4">Account Details</h1>
-            @if (Model.Account != null)
-            {
-                <table class="table">
-                    <tr>
-                        <td><strong>Account ID:</strong></td>
-                        <td>@Model.Account.AccountId</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Balance:</strong></td>
-                        <td>@Model.Account.Balance</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Created:</strong></td>
-                        <td>@Model.Account.Created</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Customer Name:</strong></td>
-                        <td>@Model.CustomerName</td>
-                    </tr>
-                </table>
-
-                <a asp-page="/Sections/AccountViews/Withdraw" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Withdraw</a>
-                <a asp-page="/Sections/AccountViews/Deposit" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Deposit</a>
-                <a asp-page="/Sections/AccountViews/Transfer" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Transfer</a>
-
-                <!-- Withdraw form goes here -->
-                
-            }
-            else
-            {
-                <p>No account details available.</p>
-            }
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Account Management</h1>
+                <span>KYH Bank System</span>
+            </div>
         </div>
     </div>
 </div>
+<div class="container" style="margin-top:100px">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Account Management</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Account Details</h1>
+                    @if (Model.Account != null)
+                    {
+                        <table class="table">
+                            <tr>
+                                <td><strong>Account ID:</strong></td>
+                                <td>@Model.Account.AccountId</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Balance:</strong></td>
+                                <td>@Model.Account.Balance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Created:</strong></td>
+                                <td>@Model.Account.Created</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Customer Name:</strong></td>
+                                <td>@Model.CustomerName</td>
+                            </tr>
+                        </table>
+
+                        <a asp-page="/Sections/AccountViews/Withdraw" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Withdraw</a>
+                        <a asp-page="/Sections/AccountViews/Deposit" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Deposit</a>
+                        <a asp-page="/Sections/AccountViews/Transfer" asp-route-accountId="@Model.Account.AccountId" class="btn btn-primary">Transfer</a>
+
+                    }
+                    else
+                    {
+                        <p>No account details available.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

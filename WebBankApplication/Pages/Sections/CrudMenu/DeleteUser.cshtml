@@ -2,53 +2,61 @@
 @model WebBankApplication.Pages.Sections.CrudMenu.DeleteUserModel
 @{
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete User</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Delete User</h1>
-
-        @if (Model.Users != null && Model.Users.Any())
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model.Users)
-                    {
-                        <tr>
-                            <td>@user.Id</td>
-                            <td>@user.UserName</td>
-                            <td>@user.Email</td>
-                            <td>
-                                <form method="post">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>No users found.</p>
-        }
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Delete User</h1>
+                <span>KYH Bank System</span>
+            </div>
+        </div>
     </div>
-
-    <!-- Include Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+<div class="container" style="margin-top:100px">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Delete User</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.Users != null && Model.Users.Any())
+            {
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="thead-dark">
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.UserName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    <form method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No users found.</p>
+            }
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
